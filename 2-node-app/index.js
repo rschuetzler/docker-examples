@@ -14,7 +14,6 @@ const quotes = [
   { text: "I'm allergic to sushi. Every time I eat more than 80 sushis, I barf.", character: "Andy Dwyer" },
   { text: "Time is money, money is power, power is pizza, and pizza is knowledge.", character: "April Ludgate" },
   { text: "I am big enough to admit that I am often inspired by myself.", character: "Leslie Knope" },
-  { text: "Never half-ass two things. Whole-ass one thing.", character: "Ron Swanson" },
   { text: "I don't even have time to tell you how wrong you are. Actually, it's gonna bug me if I don't.", character: "April Ludgate" },
   { text: "I tried to make ramen in the coffee pot and I broke everything.", character: "Andy Dwyer" },
   { text: "Fish meat is practically a vegetable.", character: "Ron Swanson" }
