@@ -1,0 +1,39 @@
+# Files to exclude from Elastic Beanstalk deployment
+# Similar to .gitignore but specific to EB deployments
+
+# Local development files
+docker-compose.dev.yml
+.env
+.env.local
+
+# Node modules (will be installed in container)
+app/node_modules
+
+# Development and testing
+*.test.js
+*.spec.js
+__tests__
+coverage
+
+# Documentation
+*.md
+!README.md
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # Local PostgreSQL Database (development only)
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: guestbook
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Node.js Application (development overrides)
+  app:
+    command: npm run dev  # Use nodemon for hot reload
+    environment:
+      # Override with local database settings
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: guestbook
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      NODE_ENV: development
+    volumes:
+      # Mount source code for hot reload
+      - ./app:/app
+      # Prevent node_modules from being overwritten
+      - /app/node_modules
+    ports:
+      # Expose app directly in development (no nginx)
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Disable nginx in development by setting scale to 0
+  nginx:
+    deploy:
+      replicas: 0
+
+# Named volume for database persistence in development
+volumes:
+  postgres_data:

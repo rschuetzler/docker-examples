@@ -210,25 +210,6 @@ Try posting a few messages. They're being stored in PostgreSQL, served by Node.j
 
 To stop everything, press `Ctrl+C` in the terminal where `docker compose up` is running.
 
-## Live Reloading for Development
-
-Here's a cool bonus: the app is configured with **nodemon** for live reloading, and the code is mounted as a volume. This means you can edit the application files on your host machine and the changes will automatically be reflected in the running container!
-
-Try it out:
-1. Make sure the services are running: `docker compose up`
-2. Open `app/views/index.ejs` in your editor
-3. Change the heading text from "📝 Guestbook" to "📝 My Awesome Guestbook"
-4. Save the file
-5. Refresh your browser at http://localhost
-
-You'll see your changes instantly, without rebuilding the image or restarting containers! This is perfect for development workflows.
-
-The magic happens through two things:
-1. **Volume mount**: `./app:/app` maps your local code into the container
-2. **Nodemon**: Watches for file changes and automatically restarts the Node.js server
-
-**NOTE:** The `node_modules` directory is mounted as an anonymous volume (`/app/node_modules`). This prevents the container's installed packages from being overwritten by your host's `node_modules` folder, which is important if you're on a different architecture (like developing on Mac ARM but running Linux containers).
-
 ## Common Docker Compose Commands
 
 Here are the essential commands you'll use regularly:
@@ -320,29 +301,12 @@ docker compose exec app sh
 Inside the container, try pinging the database:
 
 ```bash
-# This won't work because ping isn't installed, but we can use the Node.js REPL
 node -e "console.log('DB_HOST is:', process.env.DB_HOST)"
 ```
 
 You'll see it prints `db` - the service name. That's how containers find each other!
 
 Type `exit` to leave the container.
-
-## Viewing the Data
-
-You can also connect directly to PostgreSQL to see your messages:
-
-```bash
-docker compose exec db psql -U postgres -d guestbook
-```
-
-Once in the PostgreSQL prompt, try:
-
-```sql
-SELECT * FROM messages;
-```
-
-You'll see all the messages you posted! Type `\q` to exit.
 
 ## Tips and Gotchas
 
@@ -384,20 +348,3 @@ If you want to remove the database volume too:
 ```bash
 docker compose down -v
 ```
-
-## What's Next?
-
-Now you have the foundational skills for working with Docker:
-- Building images
-- Running containers
-- Managing volumes for persistence
-- Orchestrating multiple services with Docker Compose
-
-The next steps in your Docker journey might include:
-- Deploying containers to production (using cloud services like AWS, Google Cloud, or Azure)
-- Container orchestration at scale with Kubernetes
-- Continuous Integration/Continuous Deployment (CI/CD) with Docker
-- Docker security best practices
-- Multi-stage builds for optimized images
-
-But honestly? You already know enough to be productive with Docker in your day-to-day development. Go build something cool!

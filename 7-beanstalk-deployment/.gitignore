@@ -1,0 +1,31 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node modules
+app/node_modules
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Elastic Beanstalk
+.elasticbeanstalk/
+.gitignore.eba
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Testing
+coverage/
+.nyc_output/
