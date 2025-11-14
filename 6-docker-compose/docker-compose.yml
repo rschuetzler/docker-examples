@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: guestbook
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Node.js Application
+  app:
+    build: ./app
+    command: npm run dev
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: guestbook
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    # Not exposing ports to host - only accessible through nginx
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+
+# Named volume for database persistence
+volumes:
+  postgres_data:
