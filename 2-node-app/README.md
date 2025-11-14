@@ -1,4 +1,4 @@
-# Web app containers, and Container management
+# Web app containers
 
 Much of the time you work with Docker, it will be in a web development context.
 It can make the job easier in a lot of ways, so let's see what that looks like.
