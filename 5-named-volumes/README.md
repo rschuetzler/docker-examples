@@ -232,9 +232,9 @@ Be careful with `prune` - it will delete any volumes not currently attached to a
 
 Even with named volumes, remember that the container and image are still immutable:
 
-- The **database software** (PostgreSQL itself) doesn't change unless you pull a new image and create a new container
-- The **database configuration** baked into the image doesn't change
-- Only the **data** in your named volume can change
+- The database software (PostgreSQL itself) doesn't change unless you pull a new image and create a new container
+- The database configuration baked into the image doesn't change
+- Only the data in your named volume can change
 
 This is actually a powerful combination:
 - Your database software version is predictable and version-controlled (immutable images)
