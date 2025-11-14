@@ -48,7 +48,7 @@ Docker also holds on to all of your previous images (built with the `docker buil
 docker image ls
 ```
 
-And clean them up with `docker image rm` or docker image prune` just like we did with containers. Prune gets rid of all images that have been superseded by a new image with the same tag (so unique tags are still kept), and `rm` gets rid of a single image by id or name. If you want to get rid of all images not currently used in a container, run:
+And clean them up with `docker image rm` or `docker image prune` just like we did with containers. Prune gets rid of all images that have been superseded by a new image with the same tag (so unique tags are still kept), and `rm` gets rid of a single image by id or name. If you want to get rid of all images not currently used in a container, run:
 
 ```sh
 docker image prune -a
